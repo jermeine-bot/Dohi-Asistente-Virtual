@@ -16,8 +16,12 @@ import { AppText } from '../../../src/components/common/AppText';
 import { AppLogo } from '../../../src/components/common/AppLogo';
 import { StatusBadge } from '../../../src/components/common/StatusBadge';
 import { mockUser } from '../../../src/data/mockUser';
+import { useAuth } from '../../../src/context/AuthContext';
 
 export default function ProfileScreen() {
+  const { user: authUser, logout } = useAuth();
+  const currentUser = authUser || mockUser;
+
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [offlineModeEnabled, setOfflineModeEnabled] = useState(false);
   const [biometricsEnabled, setBiometricsEnabled] = useState(true);
@@ -43,7 +47,10 @@ export default function ProfileScreen() {
         {
           text: 'Cerrar Sesión',
           style: 'destructive',
-          onPress: () => router.replace('/onboarding'),
+          onPress: () => {
+            logout();
+            router.replace('/(auth)/login');
+          },
         },
       ]
     );
@@ -59,7 +66,7 @@ export default function ProfileScreen() {
         <View style={styles.profileHeaderCard}>
           <View style={styles.avatarRow}>
             <View style={styles.avatarContainer}>
-              <Image source={{ uri: mockUser.avatarUrl }} style={styles.avatar} />
+              <Image source={{ uri: currentUser.avatarUrl }} style={styles.avatar} />
               <TouchableOpacity
                 onPress={handleEditProfile}
                 activeOpacity={0.8}
@@ -71,13 +78,13 @@ export default function ProfileScreen() {
 
             <View style={styles.userTextCol}>
               <AppText variant="xl" weight="bold" color={colors.navy}>
-                {mockUser.name}
+                {currentUser.name}
               </AppText>
               <AppText variant="sm" color={colors.textSecondary}>
-                {mockUser.email}
+                {currentUser.email}
               </AppText>
               <AppText variant="xs" color={colors.primary} weight="medium">
-                {mockUser.phone}
+                {currentUser.phone || '+505 8888 8888'}
               </AppText>
             </View>
           </View>
@@ -86,17 +93,17 @@ export default function ProfileScreen() {
           <View style={styles.vitalsStrip}>
             <View style={styles.vitalItem}>
               <AppText variant="xs" color={colors.textMuted}>Sangre</AppText>
-              <AppText variant="base" weight="bold" color={colors.primary}>{mockUser.bloodType}</AppText>
+              <AppText variant="base" weight="bold" color={colors.primary}>{currentUser.bloodType || 'O+'}</AppText>
             </View>
             <View style={styles.vitalDivider} />
             <View style={styles.vitalItem}>
-              <AppText variant="xs" color={colors.textMuted}>Nacimiento</AppText>
-              <AppText variant="sm" weight="bold" color={colors.navy}>14 May 1994</AppText>
+              <AppText variant="xs" color={colors.textMuted}>Edad / Sexo</AppText>
+              <AppText variant="sm" weight="bold" color={colors.navy}>{currentUser.age ? `${currentUser.age} añ` : '26 añ'} • {currentUser.gender ? currentUser.gender[0] : 'F'}</AppText>
             </View>
             <View style={styles.vitalDivider} />
             <View style={styles.vitalItem}>
-              <AppText variant="xs" color={colors.textMuted}>Alergias</AppText>
-              <AppText variant="sm" weight="bold" color={colors.error}>{mockUser.allergies.length}</AppText>
+              <AppText variant="xs" color={colors.textMuted}>Ubicación</AppText>
+              <AppText variant="xs" weight="bold" color={colors.navy} numberOfLines={1}>{currentUser.location || 'Managua'}</AppText>
             </View>
           </View>
         </View>

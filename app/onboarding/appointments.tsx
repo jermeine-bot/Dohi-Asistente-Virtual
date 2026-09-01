@@ -10,7 +10,7 @@ import { DohiCharacter } from '../../src/components/dohi/DohiCharacter';
 
 export default function OnboardingAppointmentsScreen() {
   const handleStart = () => {
-    router.replace('/(app)/(tabs)');
+    router.replace('/(auth)/login');
   };
 
   return (

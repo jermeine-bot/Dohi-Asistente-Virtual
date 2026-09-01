@@ -12,6 +12,8 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import { colors } from '../src/theme';
 
+import { AuthProvider } from '../src/context/AuthContext';
+
 // Keep splash screen visible while loading resources
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -34,14 +36,17 @@ export default function RootLayout() {
   }
 
   return (
-    <SafeAreaProvider>
-      <StatusBar style="dark" backgroundColor={colors.background} />
-      <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="splash" />
-        <Stack.Screen name="onboarding" />
-        <Stack.Screen name="(app)" />
-      </Stack>
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <StatusBar style="dark" backgroundColor={colors.background} />
+        <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="splash" />
+          <Stack.Screen name="onboarding" />
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="(app)" />
+        </Stack>
+      </SafeAreaProvider>
+    </AuthProvider>
   );
 }

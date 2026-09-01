@@ -19,8 +19,11 @@ import { FeatureCard } from '../../../src/components/medical/FeatureCard';
 import { mockUser } from '../../../src/data/mockUser';
 import { mockTodayMedications } from '../../../src/data/mockMedications';
 import { mockFeatures, mockQuickAccess } from '../../../src/data/mockFeatures';
+import { useAuth } from '../../../src/context/AuthContext';
 
 export default function HomeScreen() {
+  const { user: authUser } = useAuth();
+  const currentUser = authUser || mockUser;
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = () => {
@@ -51,7 +54,7 @@ export default function HomeScreen() {
               </AppText>
             </View>
             <AppText variant="2xl" weight="bold" color={colors.navy} style={styles.greeting}>
-              Hola, {mockUser.name.split(' ')[0]}!
+              Hola, {currentUser.name.split(' ')[0]}!
             </AppText>
             <AppText variant="sm" color={colors.textSecondary}>
               ¿Cómo estás el día de hoy?
@@ -65,7 +68,7 @@ export default function HomeScreen() {
               style={styles.bellButton}
             >
               <Feather name="bell" size={20} color={colors.navy} />
-              {mockUser.unreadNotifications > 0 && (
+              {(currentUser.unreadNotifications || 0) > 0 && (
                 <View style={styles.notificationDot} />
               )}
             </TouchableOpacity>
@@ -75,7 +78,7 @@ export default function HomeScreen() {
               onPress={() => router.push('/(app)/(tabs)/profile')}
               style={styles.avatarWrapper}
             >
-              <Image source={{ uri: mockUser.avatarUrl }} style={styles.avatar} />
+              <Image source={{ uri: currentUser.avatarUrl }} style={styles.avatar} />
             </TouchableOpacity>
           </View>
         </View>

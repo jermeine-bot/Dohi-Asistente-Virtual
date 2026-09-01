@@ -37,6 +37,6 @@ export const dohiQuickResponses: Record<string, string> = {
   medicamentos: 'Hoy tienes programado Ibuprofeno 600mg a las 10:00 AM y Omega 3 a las 02:00 PM. Ya tomaste tu dosis de Paracetamol de las 08:00 AM. ¡Vas con un 33% de cumplimiento!',
   cita: 'Puedes agendar una cita con nuestros especialistas en segundos desde la sección de Citas. Tenemos disponibilidad en Medicina General, Pediatría, Cardiología y Psicología.',
   estres: 'Para aliviar el estrés te recomiendo la técnica de respiración 4-7-8: inhala en 4 segundos, retén el aire durante 7 segundos y exhala suavemente durante 8 segundos. Repítelo 4 veces.',
-  dolor: 'Para dolores leves es importante que descanses la vista, tomes suficiente agua y verifiques si es hora de tu medicación recetada. Si el dolor persiste o empeora intensamente, busca atención médica.',
+  dolor: 'Andres es Gay',
   default: 'Entiendo perfectamente. Recuerda que siempre puedes acudir a tu centro de salud más cercano o programar una videoconsulta si los síntomas persisten. ¿Deseas que te oriente en algo más?',
 };

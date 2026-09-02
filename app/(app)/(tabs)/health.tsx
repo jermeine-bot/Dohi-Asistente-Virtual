@@ -101,6 +101,50 @@ export default function HealthHubScreen() {
 
         {/* 2. Grid of Health Modules */}
         <View style={styles.gridContainer}>
+          {/* Jornadas y Eventos de Salud */}
+          <TouchableOpacity
+            activeOpacity={0.88}
+            onPress={() => router.push('/(app)/health-campaigns')}
+            style={[styles.moduleCard, { backgroundColor: '#F0F9FF', borderColor: '#BAE6FD' }]}
+          >
+            <View style={[styles.moduleIconCircle, { backgroundColor: '#E0F2FE' }]}>
+              <Feather name="calendar" size={24} color="#0284C7" />
+            </View>
+            <AppText variant="base" weight="bold" color={colors.navy} style={styles.moduleTitle}>
+              Jornadas de Salud
+            </AppText>
+            <AppText variant="xs" color={colors.textSecondary} numberOfLines={2}>
+              Vacunación, ferias médicas y abate por zona.
+            </AppText>
+            <View style={styles.moduleFooter}>
+              <AppText variant="xs" weight="bold" color="#0284C7">
+                Ver eventos →
+              </AppText>
+            </View>
+          </TouchableOpacity>
+
+          {/* Alertas Epidemiológicas */}
+          <TouchableOpacity
+            activeOpacity={0.88}
+            onPress={() => router.push('/(app)/epidemiological-alerts')}
+            style={[styles.moduleCard, { backgroundColor: '#FEF2F2', borderColor: '#FCA5A5' }]}
+          >
+            <View style={[styles.moduleIconCircle, { backgroundColor: '#FEE2E2' }]}>
+              <Feather name="alert-triangle" size={24} color="#DC2626" />
+            </View>
+            <AppText variant="base" weight="bold" color={colors.navy} style={styles.moduleTitle}>
+              Alertas Sanitarias
+            </AppText>
+            <AppText variant="xs" color={colors.textSecondary} numberOfLines={2}>
+              Avisos y mapa de prevención epidemiológica.
+            </AppText>
+            <View style={styles.moduleFooter}>
+              <AppText variant="xs" weight="bold" color="#DC2626">
+                Ver alertas →
+              </AppText>
+            </View>
+          </TouchableOpacity>
+
           {/* Escáner de Exámenes */}
           <TouchableOpacity
             activeOpacity={0.88}

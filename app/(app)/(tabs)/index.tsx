@@ -83,6 +83,51 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* Banner de Alerta Epidemiológica Destacada */}
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={() => router.push('/(app)/epidemiological-alerts')}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: '#FEF2F2',
+            borderWidth: 1.5,
+            borderColor: '#FCA5A5',
+            borderRadius: radius.xl,
+            padding: spacing.md,
+            marginBottom: spacing.base,
+            ...shadows.sm,
+          }}
+        >
+          <View
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 20,
+              backgroundColor: '#FEE2E2',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginRight: spacing.md,
+            }}
+          >
+            <Feather name="alert-triangle" size={20} color="#DC2626" />
+          </View>
+          <View style={{ flex: 1, marginRight: spacing.xs }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
+              <AppText variant="xs" weight="bold" color="#DC2626" style={{ letterSpacing: 0.5 }}>
+                ALERTA ROJA EN TU ZONA
+              </AppText>
+            </View>
+            <AppText variant="xs" weight="bold" color={colors.navy} numberOfLines={1}>
+              Brote de Dengue registrado en Managua
+            </AppText>
+            <AppText variant="xs" color={colors.textSecondary} numberOfLines={1}>
+              Toca para ver recomendaciones del MINSA
+            </AppText>
+          </View>
+          <Feather name="chevron-right" size={18} color="#DC2626" />
+        </TouchableOpacity>
+
         {/* Dohi Wellness Card */}
         <View style={styles.section}>
           <DohiWellnessCard

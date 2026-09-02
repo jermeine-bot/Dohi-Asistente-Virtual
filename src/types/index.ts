@@ -8,3 +8,6 @@ export * from './Message';
 export * from './Weight';
 export * from './Feature';
 export * from './FirstAid';
+export * from './HealthCampaign';
+export * from './EpidemiologicalAlert';
+

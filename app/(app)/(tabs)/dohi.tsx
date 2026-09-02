@@ -25,6 +25,12 @@ export default function DohiChatScreen() {
 
   const getDohiAnswer = (query: string): string => {
     const lower = query.toLowerCase();
+    if (lower.includes('jornada') || lower.includes('vacuna') || lower.includes('feria')) {
+      return dohiQuickResponses.jornada;
+    }
+    if (lower.includes('alerta') || lower.includes('epidemia') || lower.includes('dengue') || lower.includes('brote')) {
+      return dohiQuickResponses.alerta;
+    }
     if (lower.includes('fiebre') || lower.includes('temperatura')) {
       return dohiQuickResponses.fiebre;
     }
@@ -40,7 +46,7 @@ export default function DohiChatScreen() {
     if (lower.includes('dolor') || lower.includes('cabeza') || lower.includes('malestar')) {
       return dohiQuickResponses.dolor;
     }
-    return `Gracias por contarme. Comprendo tu consulta sobre "${query}". Recuerda que en DOHI puedes consultar con nuestros especialistas en telemedicina o verificar tus medicamentos programados para hoy. ¿Te gustaría que te ayude a agendar una cita?`;
+    return `Gracias por contarme. Comprendo tu consulta sobre "${query}". Recuerda que en DOHI puedes revisar las Jornadas de Salud de tu zona, consultar las Alertas Sanitarias o agendar una cita médica en telemedicina. ¿Cómo deseas proceder?`;
   };
 
   const handleSend = (textToSend?: string) => {

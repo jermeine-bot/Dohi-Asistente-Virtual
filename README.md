@@ -49,6 +49,8 @@
 - Directorio georreferenciado de hospitales y centros de salud en Nicaragua.
 - Protocolos de primeros auxilios y marcación directa a líneas de emergencia.
 - Módulo de bienestar físico y salud emocional.
+- **Jornadas y eventos territoriales de salud** (vacunación, ferias médicas, abatización y abate por departamento/municipio/barrio).
+- **Alertas epidemiológicas por zona** (clasificación por gravedad 🔴🟠🟡🔵, mapa de prevención, checklist de síntomas y notificaciones comunitarias).
 
 ---
 
@@ -60,6 +62,8 @@
 |  **Cero Filas y Esperas** | Reserva inmediata de consultas médicas en 5 sencillos pasos y acceso a salas de telemedicina seguras. |
 |  **Adherencia Terapéutica** | Seguimiento puntual de tomas y dosis con indicadores de progreso porcentual diario y semanal. |
 |  **Expediente Centralizado** | Digitalización mediante cámara y almacenamiento categorizado de análisis clínicos e informes. |
+|  **Vigilancia Epidemiológica** | Alertas epidemiológicas en tiempo real con checklist de prevención, origen oficial (MINSA/OPS) y notificaciones de zona. |
+|  **Jornadas Territoriales** | Mapeo interactivo y filtrado por Departamento $\rightarrow$ Municipio $\rightarrow$ Barrio/Comarca en Nicaragua. |
 |  **Respuesta Inmediata** | Guías de primeros auxilios paso a paso con advertencias médicas y enlace directo a los números de emergencia (118 / 128). |
 
 ---
@@ -69,12 +73,13 @@
 ### 1.  Inicio (Dashboard Central)
 - Saludo personalizado con estado del usuario y notificaciones.
 - Tarjeta interactiva **Dohi Wellness** para iniciar conversaciones de orientación.
+- Banner destacado de **Alerta Epidemiológica Roja** si existe riesgo activo en el departamento del usuario.
 - Tarjeta de vista previa del próximo medicamento pendiente con hora y dosis.
-- Accesos directos a Telemedicina, Citas, Documentos y Centros de Salud.
+- Accesos directos a Telemedicina, Citas, Documentos, Jornadas y Centros de Salud.
 
 ### 2.  Asistente Inteligente Dohi (Chat Clínico)
 - Interfaz conversacional en tiempo real con indicador de actividad ("Dohi está respondiendo...").
-- Motor de respuestas rápidas sobre fiebre, medicación, estrés, primeros auxilios y citas.
+- Motor de respuestas rápidas sobre fiebre, medicación, jornadas de vacunación, alertas sanitarias, estrés, primeros auxilios y citas.
 - Botones de sugerencias rápidas (*chips*) para continuar la interacción de forma fluida.
 - Encabezado con estado "En línea" y verificación médica oficial.
 
@@ -124,7 +129,22 @@
 - **Bienestar Emocional**: Selector de estado anímico con emojis, factores determinantes (*Trabajo, Sueño, Familia, etc.*), notas reflexivas y consejos de respiración consciente.
 - **Bienestar Físico**: Registro de síntomas frecuentes con escala de intensidad numérica del 1 al 5 y recomendaciones preventivas.
 
-### 11.  Perfil y Seguridad del Paciente
+### 11. 📢 Jornadas y Eventos de Salud
+- Búsqueda territorial avanzada en Nicaragua: **Departamento $\rightarrow$ Municipio $\rightarrow$ Barrio/Comarca**.
+- Modo de visualización dual: **Vista Lista** o **Vista Mapa Territorial** con pins interactivos.
+- Filtros por tipo de jornada: *Vacunación, Dengue/Abate, Medicina General, Odontología, Oftalmología, Salud Materna*.
+- Detalle de jornada con requisitos, servicios incluidos, teléfono del organizador, **Recordatorios** y opción de **Compartir por WhatsApp**.
+
+### 12. 🚨 Alertas Epidemiológicas
+- Detector y selector de alertas según departamento y municipio del usuario.
+- Clasificación por prioridades de color oficial:
+  - 🔴 **Alta Prioridad**: Brotes activos (ej. Dengue DENV-3).
+  - 🟠 **Atención**: Aumento de infecciones respiratorias agudas.
+  - 🟡 **Preventiva**: Planes de desratización y desinsectación.
+  - 🔵 **Informativa**: Boletines oficiales del Ministerio de Salud (MINSA).
+- Pantalla de detalle con **Checklist de prevención**, **Síntomas característicos**, fecha de actualización, fuente oficial (MINSA/OPS) y switch de **Notificaciones locales de zona**.
+
+### 13.  Perfil y Seguridad del Paciente
 - Resumen clínico básico: tipo de sangre, fecha de nacimiento y número de alergias registradas.
 - Tarjeta de contacto de emergencia con botón de llamada directa.
 - Configuración de preferencias: notificaciones, autenticación biométrica (FaceID/Huella) y modo sin conexión (*Offline*).
@@ -193,7 +213,9 @@ dohi-app/
 │       ├── appointment-assistant/      # Asistente de citas y consejos
 │       ├── book-appointment/          # Flujo de 5 pasos para reservar cita
 │       ├── documents/                 # Bóveda de documentos médicos
+│       ├── epidemiological-alerts/     # Alertas sanitarias y mapas de prevención (🔴🟠🟡🔵)
 │       ├── first-aid/                 # Guía clínica de primeros auxilios
+│       ├── health-campaigns/          # Jornadas de salud, vacunación y abate (Lista/Mapa)
 │       ├── health-centers/            # Centros de salud y hospitales
 │       ├── medications/               # Adherencia y cronograma de dosis
 │       ├── scanner/                   # Escáner de recetas y exámenes
@@ -361,7 +383,7 @@ La aplicación está diseñada siguiendo buenas prácticas para el manejo de inf
 
 - [x] Arquitectura de pantallas y navegación por pestañas con Expo Router.
 - [x] Integración de identidad visual oficial y mascotas PNG de Dohi en todas las pantallas.
-- [x] Módulos completos: Citas, Telemedicina, Medicamentos, Documentos, Escáner, IMC, Centros de Salud, Primeros Auxilios y Bienestar.
+- [x] Módulos completos: Citas, Telemedicina, Medicamentos, Documentos, Escáner, IMC, Centros de Salud, Primeros Auxilios, Bienestar, **Jornadas de Salud** y **Alertas Epidemiológicas (🔴🟠🟡🔵)**.
 - [x] Tipado estricto y componentes UI reutilizables (100% TypeScript validado).
 - [ ] **Fase 2:** Conexión con Backend REST / GraphQL y Base de Datos PostgreSQL.
 - [ ] **Fase 3:** Integración del Asistente Dohi con LLM y RAG médico especializado.

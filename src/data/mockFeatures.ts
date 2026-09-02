@@ -64,4 +64,12 @@ export const mockQuickAccess: QuickAccessItem[] = [
     color: '#7C3AED',
     bgColor: '#EDE9FE',
   },
+  {
+    id: 'qa-4',
+    title: 'Jornadas',
+    iconName: 'calendar',
+    route: '/(app)/health-campaigns',
+    color: '#0284C7',
+    bgColor: '#E0F2FE',
+  },
 ];

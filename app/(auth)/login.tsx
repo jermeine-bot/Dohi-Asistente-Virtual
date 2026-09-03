@@ -38,8 +38,8 @@ export default function LoginScreen() {
 
     if (!password) {
       newErrors.password = 'La contraseña es requerida';
-    } else if (password.length < 4) {
-      newErrors.password = 'La contraseña debe tener al menos 4 caracteres';
+    } else if (password.length < 6) {
+      newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
     }
 
     setErrors(newErrors);
@@ -51,7 +51,7 @@ export default function LoginScreen() {
 
     setLoading(true);
     try {
-      await login(email, password);
+      await login(email.trim().toLowerCase(), password);
       router.replace('/(app)/(tabs)');
     } catch (err) {
       Alert.alert('Error', 'No se pudo iniciar sesión. Intenta de nuevo.');
@@ -60,15 +60,15 @@ export default function LoginScreen() {
     }
   };
 
-  const handleDemoLogin = async () => {
-    setLoading(true);
-    try {
-      await login();
-      router.replace('/(app)/(tabs)');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const handleDemoLogin = async () => {
+  //   setLoading(true);
+  //   try {
+  //     await login();
+  //     router.replace('/(app)/(tabs)');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
@@ -187,23 +187,23 @@ export default function LoginScreen() {
             />
 
             {/* Divider */}
-            <View style={styles.dividerRow}>
+            {/* <View style={styles.dividerRow}>
               <View style={styles.dividerLine} />
               <AppText variant="xs" color={colors.textMuted} style={styles.dividerText}>
                 o
               </AppText>
               <View style={styles.dividerLine} />
-            </View>
+            </View> */}
 
             {/* Quick Demo Login */}
-            <AppButton
+            {/* <AppButton
               title="Ingresar como Paciente Demo"
               variant="outline"
               size="md"
               disabled={loading}
               onPress={handleDemoLogin}
               leftIcon={<Feather name="user-check" size={16} color={colors.primary} />}
-            />
+            /> */}
           </View>
 
           {/* Footer Register Link */}

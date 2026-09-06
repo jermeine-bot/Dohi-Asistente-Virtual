@@ -26,20 +26,6 @@ export default function ProfileScreen() {
   const [offlineModeEnabled, setOfflineModeEnabled] = useState(false);
   const [biometricsEnabled, setBiometricsEnabled] = useState(true);
 
-  /*
-   * Los datos del perfil vienen desde Supabase a través de AuthContext.
-   *
-   * authUser:
-   * - name
-   * - email
-   * - phone
-   * - gender
-   * - age
-   * - avatarUrl
-   * - location
-   * - bloodType
-   */
-
   const handleEditProfile = () => {
     Alert.alert(
       'Editar Perfil',

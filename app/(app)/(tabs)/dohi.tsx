@@ -17,7 +17,7 @@ import { MessageBubble } from '../../../src/components/dohi/MessageBubble';
 import { initialMockMessages } from '../../../src/data/mockMessages';
 import { Message } from '../../../src/types/Message';
 
-const DOHI_API_URL = 'http://192.168.1.234:3000/api/dohi/chat';
+const DOHI_API_URL = 'https://dohi-asistente-virtual.onrender.com/api/dohi/chat';
 
 interface DohiHistoryMessage {
   role: 'user' | 'assistant';

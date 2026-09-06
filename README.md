@@ -455,10 +455,10 @@ La arquitectura del proyecto aplica las recomendaciones para la gestión de dato
 - [x] **Fase 1:** Módulos funcionales completados (Citas, Telemedicina, Medicamentos, Documentos, Escáner, IMC, Centros de Salud, Primeros Auxilios, Bienestar, **Jornadas de Salud** y **Alertas Epidemiológicas**).
 - [x] **Fase 1:** Tipado 100% estricto en TypeScript y catálogo de componentes UI reutilizables.
 - [x] **Fase 1:** Integración inicial del cliente Supabase (`server/src/config/supabase.ts`) y `AuthContext`.
-- [ ] **Fase 2:** Sincronización completa en tiempo real de tablas de PostgreSQL en Supabase (Citas, Medicamentos, Alertas y Documentos).
-- [ ] **Fase 3:** Integración del motor conversacional del Asistente Dohi con LLM y RAG médico especializado.
-- [ ] **Fase 4:** Programación de Notificaciones Push Locales para alertas de medicamentos y citas programadas.
-- [ ] **Fase 5:** Mapas interactivos con geolocalización GPS en vivo para centros de salud y jornadas en Nicaragua.
+- [x] **Fase 2:** Sincronización completa en tiempo real de tablas de PostgreSQL en Supabase (Citas, Medicamentos, Alertas y Documentos).
+- [x] **Fase 3:** Integración del motor conversacional del Asistente Dohi con LLM y RAG médico especializado.
+- [x] **Fase 4:** Programación de Notificaciones Push Locales para alertas de medicamentos y citas programadas.
+- [x] **Fase 5:** Mapas interactivos con geolocalización GPS en vivo para centros de salud y jornadas en Nicaragua.
 
 ---
 

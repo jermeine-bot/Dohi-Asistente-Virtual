@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.3",
-    "@expo/vector-icons": "^14.0.2",
+    "@expo/vector-icons": "~14.0.4",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@supabase/supabase-js": "^2.114.0",
     "expo": "~52.0.25",
@@ -31,7 +31,7 @@
     "lucide-react-native": "^0.469.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.6",
+    "react-native": "0.76.9",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-reanimated": "~3.16.1",
     "react-native-safe-area-context": "4.12.0",

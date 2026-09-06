@@ -385,7 +385,7 @@ La aplicación está diseñada siguiendo buenas prácticas para el manejo de inf
 - [x] Integración de identidad visual oficial y mascotas PNG de Dohi en todas las pantallas.
 - [x] Módulos completos: Citas, Telemedicina, Medicamentos, Documentos, Escáner, IMC, Centros de Salud, Primeros Auxilios, Bienestar, **Jornadas de Salud** y **Alertas Epidemiológicas (🔴🟠🟡🔵)**.
 - [x] Tipado estricto y componentes UI reutilizables (100% TypeScript validado).
-- [ ] **Fase 2:** Conexión con Backend REST / GraphQL y Base de Datos PostgreSQL.
+- [x] **Fase 2:** Conexión con Backend REST / GraphQL y Base de Datos PostgreSQL.
 - [ ] **Fase 3:** Integración del Asistente Dohi con LLM y RAG médico especializado.
 - [ ] **Fase 4:** Notificaciones push locales para recordatorios de medicamentos y citas.
 - [ ] **Fase 5:** Mapas en vivo con geolocalización GPS para centros de salud en Nicaragua.

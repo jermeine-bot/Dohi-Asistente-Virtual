@@ -46,15 +46,34 @@ export default function LoginScreen() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = async () => {
-    if (!validate()) return;
+  // Funcion handleLogin
+ const handleLogin = async () => {
+  if (!validate()) return;
 
-    setLoading(true);
-    try {
-      await login(email.trim().toLowerCase(), password);
-      router.replace('/(app)/(tabs)');
+  setLoading(true);
+
+  try {
+    const result = await login(
+      email.trim().toLowerCase(),
+      password
+    );
+
+    if (result.requiresMFASetup) {
+      router.replace('/(auth)/setup-mfa');
+      return;
+    }
+
+    if (result.requiresMFA) {
+      router.replace('/(auth)/mfa');
+      return;
+    }
+
+    router.replace('/(app)/(tabs)');
     } catch (err) {
-      Alert.alert('Error', 'No se pudo iniciar sesión. Intenta de nuevo.');
+      Alert.alert(
+        'Error',
+        'No se pudo iniciar sesión. Intenta de nuevo.'
+      );
     } finally {
       setLoading(false);
     }
@@ -185,25 +204,6 @@ export default function LoginScreen() {
               style={styles.loginButton}
               rightIcon={<Feather name="arrow-right" size={18} color={colors.white} />}
             />
-
-            {/* Divider */}
-            {/* <View style={styles.dividerRow}>
-              <View style={styles.dividerLine} />
-              <AppText variant="xs" color={colors.textMuted} style={styles.dividerText}>
-                o
-              </AppText>
-              <View style={styles.dividerLine} />
-            </View> */}
-
-            {/* Quick Demo Login */}
-            {/* <AppButton
-              title="Ingresar como Paciente Demo"
-              variant="outline"
-              size="md"
-              disabled={loading}
-              onPress={handleDemoLogin}
-              leftIcon={<Feather name="user-check" size={16} color={colors.primary} />}
-            /> */}
           </View>
 
           {/* Footer Register Link */}

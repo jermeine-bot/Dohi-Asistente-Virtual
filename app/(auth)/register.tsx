@@ -18,12 +18,13 @@ import { AppLogo } from '../../src/components/common/AppLogo';
 import { AppInput } from '../../src/components/common/AppInput';
 import { AppButton } from '../../src/components/common/AppButton';
 import { useAuth } from '../../src/context/AuthContext';
+import type { BloodType } from '@/server/src/services/authService';
 
 const avatarPresets = [
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400', // Mujer 1
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', // Hombre 1
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400', // Mujer 2
-  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400', // Hombre 2
+  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400', 
+  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', 
+  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400',
+  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400', 
 ];
 
 const genderOptions = ['Femenino', 'Masculino', 'Otro'] as const;
@@ -33,7 +34,6 @@ const locationOptions = ['Managua', 'León', 'Estelí', 'Granada', 'Matagalpa', 
 export default function RegisterScreen() {
   const { register } = useAuth();
 
-  // Form State
   const [selectedAvatar, setSelectedAvatar] = useState(avatarPresets[0]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -41,7 +41,7 @@ export default function RegisterScreen() {
   const [gender, setGender] = useState<'Masculino' | 'Femenino' | 'Otro'>('Femenino');
   const [age, setAge] = useState('25');
   const [location, setLocation] = useState('Managua');
-  const [bloodType, setBloodType] = useState('O+');
+  const [bloodType, setBloodType] = useState<BloodType>('O+');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -83,37 +83,52 @@ export default function RegisterScreen() {
     if (!validate()) return;
 
     setLoading(true);
+
     try {
-      await register({
-        name,
-        email,
-        phone,
+      const result = await register({
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        phone: phone.trim(),
         avatarUrl: selectedAvatar,
         gender,
         age: Number(age),
         location: `${location}, Nicaragua`,
         bloodType,
+        password,
       });
+      console.log('Resultado del registro:', result);
+      Alert.alert(
+        '¡Listo!',
+        'Tu cuenta se creó correctamente. Ahora puedes iniciar sesión.',
+        [
+          {
+            text: 'Aceptar',
+            onPress: () => {
+              router.replace('/(auth)/login');
+            },
+          },
+        ]
+      );
+
+    } catch (err) {
+      console.error('Error creando cuenta:', err);
 
       Alert.alert(
-        '¡Cuenta Creada!',
-        'Tu expediente de salud en DOHI se ha creado exitosamente.',
-        [{ text: 'Ingresar a DOHI', onPress: () => router.replace('/(app)/(tabs)') }]
+        'Algo falló',
+        'No fue posible crear tu cuenta. Verifica tus datos e inténtalo nuevamente.'
       );
-    } catch (err) {
-      Alert.alert('Error', 'No se pudo crear la cuenta. Intenta de nuevo.');
+
     } finally {
       setLoading(false);
     }
   };
-
+  
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={{ flex: 1 }}
       >
-        {/* Header Navigation */}
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => router.back()}
@@ -131,7 +146,6 @@ export default function RegisterScreen() {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          {/* Title & Subtitle */}
           <View style={styles.titleContainer}>
             <AppText variant="2xl" weight="bold" color={colors.navy} align="center">
               Crear Cuenta de Salud 🩺
@@ -146,9 +160,7 @@ export default function RegisterScreen() {
             </AppText>
           </View>
 
-          {/* Form Card */}
           <View style={styles.formCard}>
-            {/* Avatar Selector */}
             <View style={styles.avatarSection}>
               <AppText variant="sm" weight="medium" color={colors.textPrimary} style={styles.sectionLabel}>
                 Foto de Perfil / Avatar
@@ -180,7 +192,6 @@ export default function RegisterScreen() {
               </View>
             </View>
 
-            {/* Datos Personales */}
             <AppInput
               label="Nombre Completo"
               placeholder="Ej. María Fernanda González"
@@ -211,9 +222,7 @@ export default function RegisterScreen() {
               leftIcon={<Feather name="phone" size={18} color={colors.textMuted} />}
             />
 
-            {/* Grid Row: Sexo & Edad */}
             <View style={styles.row}>
-              {/* Sexo */}
               <View style={[styles.col, { flex: 1.3 }]}>
                 <AppText variant="sm" weight="medium" color={colors.textPrimary} style={styles.inputLabel}>
                   Sexo / Género
@@ -254,9 +263,7 @@ export default function RegisterScreen() {
               </View>
             </View>
 
-            {/* Grid Row: Lugar & Tipo de Sangre */}
             <View style={styles.row}>
-              {/* Lugar / Ciudad */}
               <View style={[styles.col, { flex: 1.2 }]}>
                 <AppText variant="sm" weight="medium" color={colors.textPrimary} style={styles.inputLabel}>
                   Departamento / Ciudad
@@ -283,7 +290,6 @@ export default function RegisterScreen() {
                 </ScrollView>
               </View>
 
-              {/* Tipo de Sangre */}
               <View style={[styles.col, { flex: 0.8 }]}>
                 <AppText variant="sm" weight="medium" color={colors.textPrimary} style={styles.inputLabel}>
                   Tipo de Sangre
@@ -311,7 +317,6 @@ export default function RegisterScreen() {
               </View>
             </View>
 
-            {/* Contraseñas */}
             <AppInput
               label="Contraseña"
               placeholder="••••••••"
@@ -341,7 +346,6 @@ export default function RegisterScreen() {
               leftIcon={<Feather name="shield" size={18} color={colors.textMuted} />}
             />
 
-            {/* Checkbox Términos */}
             <TouchableOpacity
               style={styles.termsRow}
               onPress={() => setAcceptTerms(!acceptTerms)}
@@ -361,7 +365,6 @@ export default function RegisterScreen() {
               </AppText>
             )}
 
-            {/* Submit Button */}
             <AppButton
               title="Crear Cuenta de Salud"
               variant="primary"
@@ -373,7 +376,6 @@ export default function RegisterScreen() {
             />
           </View>
 
-          {/* Footer Navigation */}
           <View style={styles.footerContainer}>
             <AppText variant="sm" color={colors.textSecondary}>
               ¿Ya tienes una cuenta?{' '}

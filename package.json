@@ -14,7 +14,7 @@
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
-    "@react-native-async-storage/async-storage": "^3.1.1",
+    "@react-native-async-storage/async-storage": "1.23.1",
     "@supabase/supabase-js": "^2.114.0",
     "expo": "~52.0.25",
     "expo-blur": "~14.0.2",
